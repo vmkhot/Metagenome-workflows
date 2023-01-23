@@ -18,7 +18,7 @@ Conversely, higher complexity communities, e.g. soil samples, where you are inte
 
 [Megahit](https://github.com/voutcn/megahit) is a conservative assembler: this means it prefers to keep contigs shorter (fragmented) with less errors (misassembly) rather than assembling longer fragments with more errors. 
 
-```shell
+```bash
 #For co-assembly
 #Have to concatenate all QC'ed forward reads from 1 sample into 1 file and reverse into another. 
 for j in {52..70}; do cat *S"$j"*_R1_001.qc.fastq > CAT_S"$j"_R1_001.qc.fastq; done;
@@ -26,7 +26,7 @@ for j in {52..70}; do cat *S"$j"*_R1_001.qc.fastq > CAT_S"$j"_R1_001.qc.fastq; d
 
 Assembly script
 
-```sh
+```bash
 #!/bin/bash
 #SBATCH --job-name=megahit           # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
@@ -56,7 +56,7 @@ MetaSPAdes (Viral)
 
 This is MetaSPAdes for viral and plasmid reads specifically but the commands are similar for other spades
 
-```shell
+```bash
 #!/bin/bash
 #SBATCH --job-name=spades      # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
@@ -82,7 +82,7 @@ Checking assembly quality with [**MetaQuast**](https://quast.sourceforge.net/met
 
 --fast option doesn't output graphs and plots and all the junk
 
-```shell
+```bash
 #!/bin/bash
 #SBATCH --job-name=metaquast           # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node

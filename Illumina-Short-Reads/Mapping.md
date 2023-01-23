@@ -10,7 +10,7 @@ Bowtie2 and bbmap are two very commonly used tools for mapping.
 
 bbmap does this task very effectively/fast. We can use some parameters to speed up the mapping job:
 
-```sh
+```bash
 ambigious=toss		# if uncertainty about which contig a read belongs to, throw it out
 minid=0.95			# minimum 95% match between read sequence and contig sequence
 ```
@@ -21,7 +21,7 @@ Once coverted, .sam files **can and should be deleted**, as they are a massive w
 
 **At the end of the mapping**, you should have a .bam and a .bam.bai (index) file for each sample. 
 
-```shell
+```bash
 for fn in ../01_qc/qc_files/CAT*_R1_001.qc.fastq;
 do
 	base="${fn:0:-16}"
@@ -47,7 +47,7 @@ Once you have all your .bam and .bam.bai files for each sample, we can use the f
 
 Produce depth.txt file for coverage and binning
 
-```shell
+```bash
 conda activate metabat2
 
 jgi_summarize_bam_contig_depths --outputDepth ./depth.txt ./*.bam

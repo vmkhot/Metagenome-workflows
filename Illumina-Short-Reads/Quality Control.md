@@ -14,7 +14,7 @@ Used a for-loop to interate through all the raw sample .fastq files starting wit
 
 This will provide an html report of your raw reads. Yes, you must open and check each one. 
 
-```shell
+```bash
 #!/bin/bash
 #SBATCH --job-name=fastqc      # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
@@ -43,7 +43,7 @@ Used for-loop to qc all the raw files. Removed all the fastq intermediates after
 
 Run bbduk.sh to trim last bases, adapters, and remove contamination. Option to run fastqc again after to check. 
 
-```shell
+```bash
 #!/bin/bash
 #SBATCH --job-name=bbduk      # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
@@ -90,7 +90,7 @@ mv *.fq intermediates
 
 Sometimes bbmap stuffs up and the reads aren't paired properly. To check:
 
-```shell
+```bash
 #Verify pair
 reformat.sh in=S108_L001_R1_001.lastbase_rm.fastq in2=S108_L001_R2_001.lastbase_rm.fastq vpair
 

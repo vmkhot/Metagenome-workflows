@@ -7,7 +7,7 @@ Phyloflash is a useful tool to get a 'first-look' into your community data using
 
 Phyloflash is a pipeline. It assembles data, finds 16s genes and classifies taxonomy using the [SILVA](https://www.arb-silva.de/) database for each sample. 
 
-```shell
+```bash
 #!/bin/bash
 #SBATCH --job-name=phylo      # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
@@ -34,7 +34,7 @@ For the taxonomy of bins, we typically use the **G**enome **T**axonomy **D**ata*
 
 ### GTDBTk
 
-```sh
+```bash
 #!/bin/bash
 #SBATCH --job-name=gtdb			# Job name
 #SBATCH --nodes=1                    # Run all processes on a single node

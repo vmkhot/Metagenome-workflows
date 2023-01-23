@@ -2,7 +2,7 @@
 
 In this step, we produce Metagenome-Assembled-Genomes (MAGs) or bins. These are approximate genomes of organisms or populations in your community. The binning algorithm for MetaBat2 uses 2 main methods to group contigs together: 1) k-mer frequency profiles of the contigs and 2) differential coverage. 
 
-```sh
+```bash
 #!/bin/bash
 #SBATCH --job-name=metabat2      # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
@@ -33,7 +33,7 @@ CheckM computes completeness, lineage, contamination, genome size, N50 and much 
 
 #### CheckM
 
-```sh
+```bash
 #!/bin/bash
 #SBATCH --job-name=metabat2      # Job name
 #SBATCH --nodes=1                    # Run all processes on a single node
