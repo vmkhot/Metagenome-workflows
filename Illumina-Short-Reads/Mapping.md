@@ -28,7 +28,7 @@ do
 	newname=$(basename $fn .qc.fastq)
 	sample="${newname:4:-7}"
 
-bbmap.sh ref= in=${base}_R1_001.qc.fastq in2=${base}_R2_001.qc.fastq out=./{sample}_bbmap.sam covstats=./{sample}_bbmap_covstats.txt scafstats=./{sample}_bbmap_scafstats.txt threads=20 minid=0.95 ambiguous=toss
+bbmap.sh ref= in=$sample_R1_001.qc.fastq in2=$sample_R2_001.qc.fastq out=./{sample}_bbmap.sam covstats=./{sample}_bbmap_covstats.txt scafstats=./{sample}_bbmap_scafstats.txt threads=20 minid=0.95 ambiguous=toss
 
 samtools view -b ./{sample}_bbmap.sam | samtools sort -o ./{sample}_bbmap_sorted.bam
 

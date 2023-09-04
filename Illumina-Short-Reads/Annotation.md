@@ -63,6 +63,22 @@ wget url/to/signalP.tar.gz
 wget url/to/tmhmm.tar.gz
 ```
 
+### Update the Apptainer Metaerg Image
+
+```bash
+# check old version
+apptainer version metaerg_latest.sif
+
+# remove old image
+rm metaerg_latest.sif
+
+# pull again
+apptainer pull docker://kinestetika/metaerg
+
+# check new version
+apptainer version metaerg_latest.sif
+```
+
 ### Run metaerg2 from apptainer
 
 To run metaerg/apptainer from slurm batch script on multiple genomes. It takes about 2h per genome with the below options so you might want to split up your genomes/MAGs into multiple directories and run parallely. *You have to use the "apptainer -B" to bind whatever directory you are working from.*

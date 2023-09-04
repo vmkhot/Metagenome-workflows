@@ -25,7 +25,7 @@ do
         base="${fn:0:-16}"
         newname=$(basename $fn .qc.fastq)
         sample="${newname:4:-7}"
-    	phyloFlash.pl -dbhome /home/vmkhot/data/Programs/silva/138.1 -lib ${sample}  -read1 ${base}_R1_001.qc.fastq -read2 ${base}_R2_001.qc.fastq -readlength 150
+    	phyloFlash.pl -dbhome /home/vmkhot/data/Programs/silva/138.1 -lib ${sample}  -read1 $sample_R1_001.qc.fastq -read2 $sample_R2_001.qc.fastq -readlength 150
 
 done
 ```

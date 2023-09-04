@@ -61,16 +61,22 @@ do
         newname=$(basename $fn .fastq.gz)
         shortname="${newname:0:-7}"
         echo $base
-#Step 1 (optional), when your reads are 151 bp instead of 150bp, this command trims off the last base of 151bp reads because that base is usually very low quality.
+# Step 1 (optional), when your reads are 151 bp instead of 150bp, this command trims off the last base of 151bp reads because that base is usually very low quality.
         bbduk.sh in=${base}_R1_001.fastq.gz in2=${base}_R2_001.fastq.gz out=${shortname}_R1_001.lastbase_rm.fastq out2=${shortname}_R2_001.lastbase_rm.fastq ftm=5
 
-#Step 2: trim off the partial adapter
+# Step 2: trim off the partial adapter
+# ktrim=r trim (right) 3' end
+# k=23: kmer to use for trimming
+# mink=11: minimum kmer to use at the end of the read
+# hdist=1: hamming distance (1 mismatch)
+# tbo: trim based on pair overlap
+# tpe: trim both reads to same length
         bbduk.sh in=${shortname}_R1_001.lastbase_rm.fastq in2=${shortname}_R2_001.lastbase_rm.fastq out=${shortname}_R1_001.adapter_rm.fastq out2=${shortname}_R2_001.adapter_rm.fastq ref=~/data/Programs/Metagenomics/bbmap/resources/adapters.fa tbo tpe k=23 mink=11 hdist=1 ktrim=r
 
-#Step 3: filter out contaminates
+# Step 3: filter out contaminates
         bbduk.sh in=${shortname}_R1_001.adapter_rm.fastq in2=${shortname}_R2_001.adapter_rm.fastq out=${shortname}_R1_001.dec.fastq out2=${shortname}_R2_001.dec.fastq outm=${shortname}_contaminates.fq ref=~/data/Programs/Metagenomics/bbmap/resources/phix_adapters.fa.gz k=31 hdist=1 stats=${shortname}_stats.txt
 
-#step 4: clipping off the low quality ends and low complexity regions (high entropy; AAAAAAA)
+# Step 4: clipping off the low quality ends and low complexity regions (high entropy; AAAAAAA)
         bbduk.sh in=${shortname}_R1_001.dec.fastq in2=${shortname}_R2_001.dec.fastq out=${shortname}_R1_001.qc.fastq out2=${shortname}_R2_001.qc.fastq qtrim=rl trimq=15 minlength=30 entropy=0.5
 done
 

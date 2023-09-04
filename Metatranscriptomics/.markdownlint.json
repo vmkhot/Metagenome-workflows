@@ -1,0 +1,12 @@
+{
+    "MD033": {
+      "allowed_elements": [
+        "sub",
+        "sup"
+      ]
+    },
+    "MD013": {
+      "line_length": 250,
+      "tables": false
+    }
+  }
