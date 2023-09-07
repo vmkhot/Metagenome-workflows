@@ -28,7 +28,10 @@ do
 	newname=$(basename $fn .qc.fastq)
 	sample="${newname:4:-7}"
 
-bbmap.sh ref= in=$sample_R1_001.qc.fastq in2=$sample_R2_001.qc.fastq out=./{sample}_bbmap.sam covstats=./{sample}_bbmap_covstats.txt scafstats=./{sample}_bbmap_scafstats.txt threads=20 minid=0.95 ambiguous=toss
+bbmap.sh ref= in=${sample}_R1_001.qc.fastq in2=${sample}_R2_001.qc.fastq \
+out=./${sample}_bbmap.sam covstats=./{sample}_bbmap_covstats.txt \
+scafstats=./${sample}_bbmap_scafstats.txt \
+threads=20 minid=0.95 ambiguous=toss
 
 samtools view -b ./{sample}_bbmap.sam | samtools sort -o ./{sample}_bbmap_sorted.bam
 
@@ -52,3 +55,5 @@ conda activate metabat2
 
 jgi_summarize_bam_contig_depths --outputDepth ./depth.txt ./*.bam
 ```
+
+Alternatively, you can also do mapping and/or calculate sequencing depth (coverage) and relative abundance per bin or per contig using [CoverM](https://github.com/wwood/CoverM/), see [Binning](Illumina-Short-Reads\Binning.md) for the example on how to generate coverage and rel abundance by genome/MAG.s

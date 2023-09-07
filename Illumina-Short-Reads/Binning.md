@@ -56,7 +56,17 @@ echo part1...finished
 checkm unbinned -x fa ./allBins/bins ../02_assembly/megahit/final.contigs.fa ./allBins/bins/unbinned.fa unbinned_stats.tsv
 ```
 
-##### Example Output
+#### [CheckM2](https://github.com/chklovski/CheckM2)
+
+```bash
+conda activate checkm2
+
+checkm2 predict -t 30 -x fa --input ./allBins/bins/ --output-directory ./Checkm2
+```
+
+##### Example Output from CheckM
+
+You'll get a simplified but more accurate version of this from CheckM2.
 
 | Bin Id  | Marker lineage                   | # genomes | # markers | # marker sets | 0    | 1    | 2    | 3    | 4    | 5+   | Completeness | Contamination | Strain heterogeneity |
 | ------- | -------------------------------- | --------- | --------- | ------------- | ---- | ---- | ---- | ---- | ---- | ---- | ------------ | ------------- | -------------------- |
@@ -70,3 +80,37 @@ checkm unbinned -x fa ./allBins/bins ../02_assembly/megahit/final.contigs.fa ./a
 In the example above, we have 3 'good' bins for sure, Bin.100, Bin.13 and Bin.20. This is based on the high completeness, low contamination and low strain heterogeneity. The threshold values of these are not set in concrete, so you have to assess for yourself whether you think a **bin is worth keeping or not**. Alternatively, you can copy them from literature or other studies. E.g. Bin.12 above is only expected to be 71% complete, however, we might find that it has some exciting taxonomy or belongs to an organism with a reduced genome, in which case, we would want to keep it for downstream analyses. Similarly Bin.16 appears to be very low completeness and hits the "root" markers, rather than kingdom Bacteria - which may indicate that it is a viral bin or something else. Last thing to note is that the values in the Marker Lineage column is not indicative of the taxonomy - simply the taxonomy of marker sets which were hit the most. 
 
 As you can see, a case can be made for keeping very few bins or keeping all the them and this will depend on your research questions and which organisms you're studying. IMHO, it's best to also do figure out the taxonomy for all the bins before deciding to keep a bin or throw it out, since it might be an organism of interest.
+
+
+
+### Sequencing Depth and Relative Abundance by MAG/Genome
+
+For this, I have previously used [CoverM](https://github.com/wwood/CoverM/)
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=coverm      # Job name
+#SBATCH --nodes=1                    # Run all processes on a single node
+#SBATCH --ntasks=1                   # Run a single task
+#SBATCH --cpus-per-task=20            # Number of CPU cores per task
+#SBATCH --mem=50G                    # Job memory request
+#SBATCH --time=10:00:00              # Time limit hrs:min:sec
+#SBATCH --output=coverm%j.log     # Standard output and error log
+pwd; hostname; date
+
+source ~/miniconda3/etc/profile.d/conda.sh
+
+conda activate coverm
+
+# COVERAGE OF MAGS (keeps bams)
+# list all your forward and reverse reads
+coverm genome -v -x fa -t 20 --methods trimmed_mean \
+-1 sample1.r1.fq,sample2.r1.fq,sample3.r1.fq -2 sample1.r2.fq,sample2.r2.fq,sample3.r2.fq \
+--genome-fasta-directory ./bins --bam-file-cache-directory ./03_mapping/coverm_bam \
+-o out_genome_coverage.tsv
+
+# RELATIVE ABUNDANCE OF MAGS (using bam files generated above)
+coverm genome -v -x fa -t 20 --methods relative_abundance \
+--bam-files sample1.bam,sample2.bam,sample3.bam \
+--genome-fasta-directory ./bins/to_keep -o output_relative_abundances.tsv
+```

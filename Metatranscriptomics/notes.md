@@ -119,3 +119,35 @@ Fold change? vs DMC?
 Differentially expressed genes can be subsequently analyzed through GSEA based on hypergeometric distributions. 
 
 **Hypergeometric distributions** = like binomial - likelihood of k successes in n draws without replacement  
+
+## Notes along my own metatranscriptome analysis
+
+### QC
+
+??
+
+### Mapping
+
+*What reference do I need for the mapping?* Need to include the full assembly even if I only look at good bins because the other sequences act as decoys.
+
+A single fasta file for the full assembly including:
+
+- Gene nucleotide sequences for my good and average bins labelled by binID.contigID.geneID.Descriptor
+- Gene nucleotide sequences for bad bins
+- Gene nucleotide sequences for the unbinned contigs 
+- Gene nucleotide sequences for the viral sequences which are not part of the original co-assembly
+
+Everything needs to be as genes because "seal.sh" will calculate RPKM values - which will normalize by gene length
+
+1. What viruses are part of the original co-assembly?
+    - Are these binned into good/avg bins? Yes => Ignore - they will get annotated
+    - Are these binned into bad bins? Yes => Pull out
+    - Are these unbinned? Yes => pull out
+2. Run metaerg2 on the bad bins and unbinned_wo_VC
+3. Pull nucl gene sequences for all VCs not in good/avg bins from metaerg2 feather files
+4. So pull nucl gene sequences from Metaerg2 feather files
+
+
+Results:
+
+1. All VCs in the co-assembly are unbinned - need to pull out of the unbinned fraction

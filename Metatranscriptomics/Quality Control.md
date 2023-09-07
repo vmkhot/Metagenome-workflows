@@ -200,3 +200,5 @@ grep "failing" *.log > non_rRNA_reads_stats.txt
 
 These samples are ordered by a time-series - looks like there was more rRNA in the samples towards the end of the time-series
 
+Additionally, I redid sortmerna on sample UT1 with a "paired_out" option to see if less rRNA reads would be pulled out to the sample but it produced the exact same result so I assume that for UT1 the rRNA is actually 47% of the reads... unfortunately. 
+
