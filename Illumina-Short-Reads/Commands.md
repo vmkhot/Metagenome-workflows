@@ -228,5 +228,9 @@ sortmerna --ref referenceDatabases/sortmerna_db/smr_v4.3_default_db.fasta \
 Mapping transcriptome reads to nucleotide gene sequences from metagenome
 
 ```bash
-seal.sh in=reads.fq nucl_seq.fa stats=sealstats.txt rpkm=sealrpkm.txt ambig=random
+seal.sh in=reads.fq nucl_seq.fa stats=sealstats.txt rpkm=sealrpkm.txt ambig=all
 ```
+
+### Differential Expression Analysis
+
+DE analysis was performed using the *DESeq2* pipeline in R. Script [here](vmkhot/Metagenome-workflows/Metatranscriptomics/R-scripts/deseq2_time_course_script_cyano.R)
