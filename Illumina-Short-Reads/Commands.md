@@ -233,4 +233,5 @@ seal.sh in=reads.fq nucl_seq.fa stats=sealstats.txt rpkm=sealrpkm.txt ambig=all
 
 ### Differential Expression Analysis
 
-DE analysis was performed using the *DESeq2* pipeline in R. Script [here](vmkhot/Metagenome-workflows/Metatranscriptomics/R-scripts/deseq2_time_course_script_cyano.R)
+DE analysis was performed using the *DESeq2* pipeline in R. The generic pipeline used to assess quality of raw counts from samples is [here](vmkhot/Metagenome-workflows/Metatranscriptomics/R-scripts/deseq2_script_sample_QC.R) and the time-course script [here](vmkhot/Metagenome-workflows/Metatranscriptomics/R-scripts/deseq2_time_course_script_cyano.R)
+
